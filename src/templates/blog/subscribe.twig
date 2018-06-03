@@ -1,0 +1,12 @@
+{% include 'components/blog/header.twig' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-offset-2 col-sm-8 box"  >
+            {% include 'components/blog/alerts.twig' %}
+            <div style="text-align: center;">
+                <a href="{{ path_for('index') }}">Back to home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/blog/footer.twig' %}

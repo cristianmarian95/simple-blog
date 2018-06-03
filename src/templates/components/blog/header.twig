@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ app.config.get('blogDescription') }}">
+    <meta name="keywords" content="{{ app.config.get('blogKeywords') }}">
+    <link href="{{ url }}/resources/blog/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ url }}/resources/blog/css/style.css?v=1.4.1.1" rel="stylesheet" type="text/css">
+    <link href="{{ url }}/resources/blog/css/animate.css?v=1.0" rel="stylesheet" type="text/css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    {% if app.config.get('enableGoogleAnalytics') %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ app.config.get('googleAnalytics') }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ app.config.get('googleAnalytics') }}');
+    </script>
+    {% endif %}
+    <title>{{ app.config.get('blogTitle') }}</title>
+</head>
+<body>

@@ -1,0 +1,77 @@
+{% set pageTitle = "ACP | Users profile" %}
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Profile for {{ app.user.getAccount(uid).username }}</div>
+            <div class="panel-body">
+                <form action="{{ path_for('adminUpdateUser') }}" method="post">
+                    <div class="row">
+                        <div class="col s12 l3">
+                            <img src="{{ app.user.getProfile(uid).avatar | raw }}" class="circle" width="200" height="200" style="margin: auto;display: block;">
+                        </div>
+                        <div class="col s12 l9">
+                            <div class="row">
+                                <div class="col s12">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" value="{{ app.user.getAccount(uid).username }}"disabled>
+                                </div>
+                                <div class="col s12">
+                                    <label for="email">Email</label>
+                                    <input type="text" id="email" value="{{ app.user.getAccount(uid).email }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" value="{{ app.user.getProfile(uid).name }}" disabled>
+                                </div>
+                                <div class="col s6">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" id="last_name" value="{{ app.user.getProfile(uid).last_name }}" disabled>
+                                </div>
+                                <div class="col s6">
+                                    <label for="country">Country</label>
+                                    <input type="text" id="country" value="{{ app.user.getProfile(uid).country }}" disabled>
+                                </div>
+                                <div class="col s6">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" value="{{ app.user.getProfile(uid).city }}" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6">
+                                    <label for="group">Group</label>
+                                    <select id="group" class="browser-default" name="permission" {% if app.user.getAccount(uid).username == 'admin' %}disabled{% endif %}>
+                                        <option value="{{ app.user.getUserGroup(app.user.getAccount(uid).id).id }}" selected>{{ app.user.getUserGroup(app.user.getAccount(uid).id).name }}</option>
+                                        <option value="" disabled>----------</option>
+                                        {% for group in app.group.getGroups() %}
+                                            <option value="{{ group.id }}">{{ group.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col s6">
+                                    <label for="status">Status</label>
+                                    <select id="status" class="browser-default" disabled>
+                                        <option value="{{ app.user.getAccount(uid).approved }}" selected>{% if app.user.getAccount(uid).approved == 1 %}Active{% else %}Inactive{% endif %}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6">
+                                    <input type="hidden" name="uid" value="{{ app.user.getAccount(uid).id }}">
+                                    {% if app.user.getAccount(uid).username != 'admin' %}
+                                        <button type="submit" class="btn-small green-custom">Update user</button>
+                                        <a href="{{ path_for('actionDeleteUser') }}/{{ app.user.getAccount(uid).id }}" class="btn-small red-custom">remove user</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/acp/footer.twig' %}

@@ -1,0 +1,43 @@
+{% include 'components/blog/header.twig' %}
+{% include 'components/blog/menu.twig' %}
+<!-- Content -->
+<div class="container">
+    <div class="row">
+        <!--- Posts --->
+        <div class="col-lg-8">
+            <div class="row">
+                {% if numberOfPosts > 0 %}
+                    {% for post in posts %}
+                        <div class="col-lg-6 col-md-6">
+                            <aside>
+                                <img src="{{ post.header_img }}" class="img-responsive">
+                                <div class="content-title">
+                                    <div class="text-center">
+                                        <h3><a href="{{ path_for('read') }}/{{ post.id }}">{{ post.title }}</a></h3>
+                                    </div>
+                                </div>
+                                <div class="content-footer">
+                                    <img class="user-small-img" src="{{ app.user.getProfile(post.user_id).avatar }}">
+                                    <span style="font-size: 16px;color: #fff;text-transform: capitalize;">{{ app.user.getAccount(post.user_id).username }}</span>
+                                    <span class="pull-right">
+                                        <span><i class="fa fa-comments" ></i> {{ app.comment.count(post.id) }}</span>
+                                    </span>
+                                </div>
+                            </aside>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="content">
+                        <div class="center-block" style="text-align: center">
+                            <i class="far fa-smile center-align center-block fa-7x"></i>
+                            <h5>There are no pots in this category</h5>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% include 'components/blog/sidebar.twig' %}
+    </div>
+</div>
+<!-- end Content -->
+{% include 'components/blog/footer.twig' %}

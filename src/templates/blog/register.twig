@@ -1,0 +1,37 @@
+{% include 'components/blog/header.twig' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6 box">
+            <div class="box-title">
+                Set up your account
+            </div>
+            {% include 'components/blog/alerts.twig' %}
+            <form action="{{ path_for('actionRegister') }}" method="post">
+                <div class="form-group">
+                    <label for="username" class="label-custom">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Chose a username">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="label-custom">Email Address</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="label-custom">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Chose a password ">
+                </div>
+                <div class="form-group">
+                    <label for="re-password" class="label-custom">Confirm Password</label>
+                    <input type="password" name="re-password" class="form-control" id="re-password" placeholder="Confirm the password ">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-custom-primary btn-complete">Continue</button>
+                </div>
+            </form>
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            <a href="{{ path_for('login') }}" class="btn btn-social btn-complete">Have account?</a>
+        </div>
+    </div>
+</div>
+{% include 'components/blog/footer.twig' %}

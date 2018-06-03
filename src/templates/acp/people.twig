@@ -1,0 +1,39 @@
+{% set pageTitle = "ACP | Users list" %}
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Users list</div>
+            <div class="panel-body">
+                {% for user in app.user.usersList() %}
+                    {% set perms = app.user.getUserGroup(user.id).permission %}
+                    <div class="row user-list {% if perms == 3 %}list-red{% elseif perms == 2 %}list-purple{% elseif perms == 1 %}list-blue{% endif %}">
+                        <div class="col s1">
+                            <img src="{{ app.user.getProfile(user.id).avatar | raw }}" alt="{{ user.username }} avatar" class="circle" width="64" height="64">
+                        </div>
+                        <div class="col s11">
+                            <div class="row">
+                                <div class="col s12">
+                                    <a href="{{ path_for('adminUserProfile') }}/{{ user.id }}"><h4>{{ user.username }}</h4></a>
+                                </div>
+                                <div class="col s12">
+                                    {% if perms == 3 %}
+                                    <span class="legend legend-red">{{ app.user.getUserGroup(user.id).name }}</span>
+                                    {% endif %}
+                                    {% if perms == 2 %}
+                                        <span class="legend legend-purple">{{ app.user.getUserGroup(user.id).name }}</span>
+                                    {% endif %}
+                                    {% if perms == 1 %}
+                                        <span class="legend legend-blue">{{ app.user.getUserGroup(user.id).name }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/acp/footer.twig' %}

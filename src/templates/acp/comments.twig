@@ -1,0 +1,35 @@
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Pending Comments</div>
+            <div class="panel-body">
+                {% if app.comment.countInactiveComments() == 0 %}
+                    <div class="center-block">
+                        <i class="far fa-smile center-align center-block fa-7x"></i>
+                        <h5 class="center-align">No pending comments</h5>
+                    </div>
+                {% endif %}
+                {% for comment in app.comment.getComments() %}
+                    <div class="row" style="padding-left: 10px;padding-right: 10px;">
+                        <div class="col s11">
+                            <span>By <a href="{{ path_for('adminUserProfile') }}/{{ comment.user_id }}">{{ app.user.getAccount(comment.user_id).username }}</a></span>
+                            <span>Date {{ comment.created_at }}</span>
+                            <p>{{ comment.content }}</p>
+                        </div>
+                        <div class="col s1">
+                            <ul class="option-list right">
+                                <li><a href="{{ path_for('confirmComment') }}/{{ comment.id }}" class="btn-trigger"><i class="fas fa-check"></i></a></li>
+                                <li><a href="" class="btn-trigger"><i class="far fa-eye"></i></a></li>
+                                <li><a href="{{ path_for('deleteComment') }}/{{ comment.id }}" class="btn-trigger"><i class="far fa-trash-alt"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/acp/footer.twig' %}

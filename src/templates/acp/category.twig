@@ -1,0 +1,76 @@
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Add new category</div>
+            <div class="panel-body">
+                <form action="{{ path_for('adminPostCategory') }}" method="post">
+                    <div class="row">
+                        <div class="col s2">
+                            <p>Name</p>
+                        </div>
+                        <div class="col s10">
+                            <input type="text" name="cat_name" placeholder="Enter the category name">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-small">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Category List</div>
+            <div class="panel-body">
+                {% for category in app.function.getCategories() %}
+
+                    <form action="{{ path_for('updateCategory') }}" method="post">
+                        <div class="row spacer">
+                            <div class="col s8">
+                                <input type="text" name="cat_name" value="{{ category.name }}">
+                                <input type="hidden" name="cat_id" value="{{ category.id }}">
+                            </div>
+                            <div class="col s4" style="padding: 5px;">
+                                <div class="center-block">
+                                    <button type="submit" class="btn-small">Update</button>
+                                    <button class="btn-small modal-trigger red-custom" data-target="category-{{ category.id }}">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="category-{{ category.id }}" class="modal" width="30%">
+                        <form action="{{ path_for('deleteCategory') }}" method="post">
+                            <div class="modal-content">
+                                <h4>Confirm</h4>
+                                <label for="category">Move the posts to another category</label>
+                                <select id="category" class="browser-default" name="category">
+                                    <option value="" selected>Chose a category</option>
+                                    <option value="" disabled>----------</option>
+                                    {% for category_list in app.function.getCategories() %}
+                                        {% if category_list.id != category.id %}
+                                        <option value="{{ category_list.id }}">{{ category_list.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <p class="small">or</p>
+                                <label>
+                                    <input type="hidden" name="delete" value="0">
+                                    <input type="checkbox" name="delete" value="1">
+                                    <span>Delete all the posts form the category</span>
+                                </label>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="cat_id" value="{{ category.id }}">
+                                <button type="submit" class="modal-close waves-effect waves-green btn-flat">Agree</button>
+                            </div>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/acp/footer.twig' %}

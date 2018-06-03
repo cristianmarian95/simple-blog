@@ -1,0 +1,30 @@
+<div class="navbar navbar-fixed-top navbar-white">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path_for('index') }}">{{ app.config.get('blogLogo') | raw }}</a>
+        </div>
+        <div class="navbar-collapse collapse" id="mobile">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path_for('index') }}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li><a href="{{ path_for('contact') }}"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+                {% if app.session.is_set('uid') %}
+                    <li><a href="{{ path_for('profile') }}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                    {% if app.user.getPermission(app.session.get('uid')) >= 2 %}
+                        <li><a href="{{ path_for('adminHome') }}" class="active"><span class="glyphicon glyphicon-th-large"></span> Admin</a></li>
+                    {% endif %}
+                    <li><a href="{{ path_for('logout') }}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                {% else %}
+                    <li><a href="{{ path_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+                    <li><a href="{{ path_for('register') }}" class="active"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">

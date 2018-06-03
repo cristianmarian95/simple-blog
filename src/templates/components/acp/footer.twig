@@ -1,0 +1,12 @@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".button-collapse").sideNav();
+            $(".modal").modal();
+            $(".collapsible").collapsible();
+            $(".dropdown-trigger").dropdown();
+        });
+        {% if app.flash.getMessage('message')[0] %}Materialize.toast("{{ app.flash.getMessage('message')[0] }}" , 4000);{% endif %}
+    </script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Edit post</div>
+            <div class="panel-body">
+                <form action="{{ path_for('editPostAction') }}" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col s12">
+                            <label for="title">Article title</label>
+                            <input type="text" id="post_title" name="title" placeholder="Enter the article title" value="{{ app.post.getPost(post_id).title }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label for="category">Category</label>
+                            <select id="category" class="browser-default" name="category">
+                                <option value="{{ app.post.getPost(post_id).category_id }}" selected>{{ app.category.getCategoryName(app.post.getPost(post_id).category_id) }}</option>
+                                <option value="" disabled>----------</option>
+                                {% for category in app.function.getCategories() %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label for="header_img">Header image (750x250)</label>
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                    <span>Select</span>
+                                    <input type="file" id="header_img" name="img">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6">
+                            <img src="{{ app.post.getPost(post_id).header_img }}" height="80px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <textarea name="content" id="froala-editor">{{ app.post.getPost(post_id).content }}</textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <input type="hidden" name="post_id" value="{{ app.post.getPost(post_id).id }}">
+                            <button type="submit" name="submit" class="btn-small">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{{ url }}/resources/acp/js/froala_editor.pkgd.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+<script>
+    $(function() {
+        $('#froala-editor').froalaEditor({
+            toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|'
+                , 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|'
+                , 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|'
+                , 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|'
+                , 'print', 'help', 'html', '|'
+                , 'undo', 'redo']
+        })
+    });
+</script>
+<script type="text/javascript" src="{{ url }}/resources/acp/js/texteditor.js"></script>
+{% include 'components/acp/footer.twig' %}

@@ -1,0 +1,36 @@
+{% include 'components/blog/header.twig' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6 box">
+            <div class="box-title">
+                Log in to your account
+            </div>
+            {% include 'components/blog/alerts.twig' %}
+            <form action="{{ path_for('actionLogin') }}" method="post">
+                <div class="form-group">
+                    <label for="email" class="label-custom">Email Address</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Please enter your email address">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="label-custom">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Please enter your password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-custom-primary btn-complete">Continue</button>
+                </div>
+            </form>
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ path_for('register') }}" class="btn btn-social btn-complete">Don't have account?</a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ path_for('recover') }}" class="btn btn-social btn-complete">Lost password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/blog/footer.twig' %}

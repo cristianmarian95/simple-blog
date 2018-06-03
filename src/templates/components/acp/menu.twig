@@ -1,0 +1,42 @@
+<div class="top-nav white-nav hide-on-lg">
+    <a href="#" class="nav-brand">SimpleBlog ACP</a>
+    <a class="right mobile-button button-collapse" data-activates="mobile"><i class="material-icons">menu</i></a>
+    <ul class="sidenav mobile-menu hide-on-lg" id="mobile">
+        <li><a href="{{ path_for('index') }}"><i class="fas fa-th-large"></i>Blog</a></li>
+        <li><a href="{{ path_for('adminHome') }}"><i class="fas fa-chart-area"></i>Stats</a></li>
+        <li><a href="{{ path_for('configs') }}"><i class="fas fa-cogs"></i>Settings</a></li>
+        <li><a href="{{ path_for('adminPeople') }}"><i class="fas fa-users"></i>People</a></li>
+        <li><a href="{{ path_for('adminCategoryGet') }}"><i class="far fa-images"></i>Categories</a></li>
+        <li><a href="{{ path_for('posts') }}"><i class="fas fa-align-left"></i>Blog Posts</a></li>
+        <li><a href="{{ path_for('adminGetCreate') }}"><i class="far fa-plus-square"></i>Add Post</a> </li>
+        <li><a href="{{ path_for('comments') }}"><i class="fas fa-comments"></i>Comments<span class="new badge">{{ app.comment.countInactiveComments() }}</span></a></li>
+        <li><a href="{{ path_for('reports') }}"><i class="fas fa-exclamation-circle"></i>Reports<span class="new badge">{{ app.report.countInactiveReports() }}</span></a></li>
+        <li><a href="{{ path_for('profile') }}"><i class="fas fa-user-circle"></i>My Profile</a></li>
+        <li><a href="{{ path_for('logout') }}"><i class="fas fa-power-off"></i>Disconnect</a></li>
+    </ul>
+</div>
+<div class="side-nav dark-nav">
+    <div class="side-nav-brand hide-on-md">
+        <a href="#">SimpleBlog ACP</a>
+    </div>
+    <h4 class="side-nav-section">Administration</h4>
+    <ul>
+        <li><a href="{{ path_for('index') }}"><i class="fas fa-th-large"></i>Blog</a></li>
+        <li><a href="{{ path_for('adminHome') }}"><i class="fas fa-chart-area"></i>Stats</a></li>
+        <li><a href="{{ path_for('configs') }}"><i class="fas fa-cogs"></i>Settings</a></li>
+        <li><a href="{{ path_for('adminPeople') }}"><i class="fas fa-users"></i>People</a></li>
+    </ul>
+    <h4 class="side-nav-section">Manage</h4>
+    <ul>
+        <li><a href="{{ path_for('adminCategoryGet') }}"><i class="far fa-images"></i>Categories</a></li>
+        <li><a href="{{ path_for('posts') }}"><i class="fas fa-align-left"></i>Blog Posts</a></li>
+        <li><a href="{{ path_for('adminGetCreate') }}"><i class="far fa-plus-square"></i>Add Post</a> </li>
+        <li><a href="{{ path_for('comments') }}"><i class="fas fa-comments"></i>Comments<span class="new badge">{{ app.comment.countInactiveComments() }}</span></a></li>
+        <li><a href="{{ path_for('reports') }}"><i class="fas fa-exclamation-circle"></i>Reports<span class="new badge">{{ app.report.countInactiveReports() }}</span></a></li>
+    </ul>
+    <h4 class="side-nav-section">Account</h4>
+    <ul>
+        <li><a href="{{ path_for('profile') }}"><i class="fas fa-user-circle"></i>My Profile</a></li>
+        <li><a href="{{ path_for('logout') }}"><i class="fas fa-power-off"></i>Disconnect</a></li>
+    </ul>
+</div>

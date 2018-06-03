@@ -1,0 +1,68 @@
+{% include 'components/blog/header.twig' %}
+{% include 'components/blog/menu.twig' %}
+<!-- Content -->
+<div class="container">
+    <div class="row">
+        <!-- Post content -->
+        <div class="col-lg-8 content">
+            <div class="post-title">{{ app.post.getPost(id).title }}</div>
+            <div class="post-info">
+                <img class="user-small-img" src="{{ app.user.getProfile(app.post.getPost(id).user_id).avatar | raw}}">
+                <span style="text-transform: capitalize;color: #858583;font-size: 14px;">{{ app.user.getAccount(app.post.getPost(id).user_id).username }}</span>
+                <span style="color: #858583;font-size: 14px;"><i class="far fa-clock"></i> {{ app.function.convertDate(app.post.getPost(id).created_at) }}  &emsp;<i class="fas fa-folder-open"></i> {{ app.category.getCategoryName(app.post.getPost(id).category_id) }}</span>
+                {% if (app.session.is_set('uid')) and (app.user.getPermission(app.session.get('uid')) >= 2)%}
+                    <span class="pull-right"><a href="{{ path_for('editPost') }}/{{ id }}" style="color: #858583;font-size: 14px;"><i class="fas fa-edit"></i> Edit</a></span>
+                {% endif %}
+            </div>
+            <div class="header-image">
+                <img src="{{ app.post.getPost(id).header_img | raw }}" class="img-responsive">
+            </div>
+            <div class="post-content">
+                {{ app.post.getPost(id).content | raw }}
+            </div>
+            <div class="post-social">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}{{ path_for('read') }}/{{ id }}" target="_blank"> <i class="fab fa-facebook-square fa-2x"></i></a>
+                <a href="https://twitter.com/home?status={{ url }}{{ path_for('read') }}/{{ id }}" target="_blank"> <i class="fab fa-twitter-square fa-2x"></i></a>
+                <a href="https://plus.google.com/share?url={{ url }}{{ path_for('read') }}/{{ id }}"> <i class="fab fa-google-plus-square fa-2x"></i></a>
+                <a href="{{ path_for('report') }}" class="pull-right" style="color: red"><i class="fas fa-exclamation-triangle"></i> Report</a>
+            </div>
+            <div class="post-comments">
+                {% if app.session.is_set('uid') %}
+                    {% include 'components/blog/alerts.twig' %}
+                    <span>Leave a comment</span>
+                    <div class="post-comment-box">
+                        <form action="{{ path_for('actionComment') }}" method="post">
+                            <div class="form-group">
+                                <textarea placeholder="Leave a comment" class="form-control" name="content" style="height: 150px;" maxlength="400"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="post_id" value="{{ id }}">
+                                <button type="submit" class="btn btn-custom-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+                <div class="comments">
+                    <!-- Comment -->
+                    {% for comment in app.comment.getPostComments(id) %}
+                        <div class="media">
+                            <div class="media-left media-top">
+                                <img class="media-object" height="45" width="45" src="{{ app.user.getProfile(comment.user_id).avatar }}">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading" style="text-transform: capitalize;color: #22aadd;">{{ app.user.getAccount(comment.user_id).username }}</h4>
+                                <span style="color: #858583;font-size: 14px;">{{ app.function.convertDate(comment.created_at) }}</span>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <!-- End comment -->
+                </div>
+            </div>
+        </div>
+        <!-- End post content -->
+        {% include 'components/blog/sidebar.twig' %}
+    </div>
+</div>
+<!-- end Content -->
+{% include 'components/blog/footer.twig' %}

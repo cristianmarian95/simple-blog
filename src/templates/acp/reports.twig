@@ -1,0 +1,25 @@
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Reports list</div>
+            <div class="panel-body">
+                {% for report in app.report.getReports() %}
+                    <div class="row" style="padding-left: 10px;padding-right: 10px;">
+                        <p>Email: {{ report.email }} Date: {{ report.created_at }}</p>
+                        <p>Reported link: <a href="{{ report.link }}" target="_blank">{{ report.link }}</a> </p>
+                        <p>{{ report.content }}</p>
+                        {% if report.approved == 0 %}
+                            <a href="{{ path_for('closeReport') }}/{{ report.id }}" class="btn-small green-custom"><i class="fas fa-check" style="font-size: 1.1em;"></i> Close</a>
+                        {% else %}
+                            <div class="legend legend-red">Closed</div>
+                        {% endif %}
+                    </div>
+                    <div class="divider"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/acp/footer.twig' %}

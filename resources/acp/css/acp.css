@@ -1,0 +1,320 @@
+/**
+ * AllRights Reserved CopyRights 2018 Fainisi Marian Cristian
+ * Site: www.cristian-apps.zyx
+ * Email: marian.fainisi@gmail.com
+ */
+
+/**
+ * Body elements
+ */
+body {
+    padding-left: 305px;
+    background-color: #f2f3f8;
+}
+
+/**
+ * Navigation elements
+ */
+
+/** Side navigation **/
+.side-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    width: 300px;
+    overflow-y: auto;
+}
+.side-nav-brand {
+    background-color: #282a3c;
+    padding: 15px;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0 1px 15px 1px rgba(69,65,78,.1);
+    letter-spacing: 1px;
+}
+.side-nav-brand a {
+    font-size: 18px;
+    padding: 3px;
+    display: block;
+    color: #d6d7e1;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.side-nav-section {
+    color: #464b66;
+    text-transform: uppercase;
+    font-size: .83rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 0 32px;
+}
+
+.side-nav > ul {
+    padding-top: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.side-nav > ul > li {
+    float: none;
+    line-height: 48px;
+}
+
+.side-nav > ul > li > a {
+    color: #868aa8;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 32px;
+    letter-spacing: .05em;
+}
+
+.side-nav span.badge {
+    margin-top: calc(24px - 11px);
+}
+
+.side-nav > ul > li > a:hover,
+.side-nav > ul > li > a:active,
+.side-nav > ul > li > a:focus {
+    background-color: #292b3a;
+}
+
+.side-nav > ul > li > a > i {
+    color: #525672;
+    margin-right: 5px;
+}
+.side-nav > ul > li > a:hover > i,
+.side-nav > ul > li > a:active > i,
+.side-nav > ul > li > a:focus > i {
+    color: #8c8ea4;
+}
+
+/** Top navigation **/
+.top-nav {
+    top: 0;
+    position: fixed;
+    left: 300px;
+    z-index: 9998;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0 1px 15px 1px rgba(69,65,78,.1);
+}
+
+.nav-brand {
+    font-size: 18px;
+    padding: 16px;
+    font-weight: 500;
+    position: absolute;
+    color: #6c757d;
+    text-transform: uppercase;
+}
+.sidenav.mobile-menu > li > a > i {
+    margin: 0;
+}
+.mobile-button {
+    padding: 7px;
+}
+.mobile-button i {
+    font-size: 39px;
+    padding: 3px;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.logout-button {
+    padding: 10px;
+    float: right;
+}
+.logout-button i {
+    line-height: inherit;
+}
+
+/** Mobile optimization **/
+.hide-on-lg {
+    display: none;
+}
+
+.hide-on-md {
+    display: block;
+}
+/** Medium and small devices **/
+@media only screen and (max-width: 1200px) {
+    body {
+        padding-left: 25.5%;
+    }
+    .side-nav {
+        width: 25%;
+    }
+    .top-nav {
+        left: 25%;
+    }
+    .hide-on-md {
+        display: block;
+    }
+
+}
+@media only screen and (max-width: 992px) {
+    body {
+        padding-left: 0;
+        padding-top: 60px;
+    }
+    .side-nav {
+        width: 200px;
+        display: none;
+    }
+    .top-nav {
+        left: 0;
+    }
+    .hide-on-lg{
+        display: block;
+    }
+    .hide-on-md {
+        display: none;
+    }
+}
+
+/** Navigation Skins **/
+.dark-nav{
+    background-color: #2c2e3e;
+}
+
+.white-nav {
+    background-color: #f8f9fa;
+}
+
+/**
+ * Body Elements
+ */
+
+.card .card-title {
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.card .card-content {
+    text-align: center;
+}
+
+.card .card-content p {
+    font-size: 18px;
+}
+
+/** Stats Colors **/
+.blue-custom {
+    background-color: #5867dd !important;
+    color: #FFFFFF;
+}
+.green-custom {
+    background-color: #28a745 !important;
+    color: #FFFFFF;
+}
+.red-custom {
+    background-color: #ff4c52 !important;
+    color: #FFFFFF;
+}
+.yellow-custom {
+    background-color: #fd7e14 !important;
+    color: #FFFFFF;
+}
+
+/** Panels **/
+.panel {
+    background-color: #FFF;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border: 0 solid transparent;
+    border-radius: .286rem;
+    margin-top: 20px;
+}
+.panel-title {
+    display: block;
+    padding: 20px 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #575962;;
+    text-transform: uppercase;
+    font-size: .83rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #ebedf2
+}
+.panel-body {
+    position: relative;
+    padding: 10px 30px;
+}
+
+.user-list {
+    border-left: 5px solid;
+    margin-top: 5px;
+}
+.list-red {
+    border-color: #dc3545;
+}
+.list-blue {
+    border-color: #007bff;
+}
+.list-purple {
+    border-color: #6610f2;
+}
+.user-list h4 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.legend {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+.legend-red {
+    background-color: #dc3545;
+    color: #FFFFFF;
+}
+.legend-purple {
+    background-color: #6610f2;
+    color: #FFFFFF;
+}
+.legend-blue {
+    background-color: #007bff;
+    color: #FFFFFF;
+}
+/** Profile **/
+.profile-label {
+    height: 3rem;
+    padding-top: 10px;
+    display: block;
+}
+.modal {
+    width: 400px !important ;
+}
+
+.post-list {
+    margin-bottom: 0 !important;
+}
+.post-title > a {
+    font-size: 24px;
+    color: #2e4453;
+    font-weight: 600;
+}
+.post-time {
+    color: #537994;
+    font-size: 12px;
+}
+.btn-trigger {
+
+    display: block;
+    color: #a8bece;
+    font-size: 16px;
+}

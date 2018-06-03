@@ -1,0 +1,144 @@
+{% include 'components/blog/header.twig' %}
+{% include 'components/blog/menu.twig' %}
+<!-- Content -->
+<div class="container">
+    <div class="row">
+        <!--- Posts --->
+        <div class="col-lg-8 content">
+            <div class="row">
+                <div class="col-lg-4 col-sm-12">
+                    <form action="{{ path_for('updateAvatar') }}" method="post" enctype="multipart/form-data">
+                        <img src="{{ app.user.getProfile(app.session.get('uid')).avatar | raw}}" class="img-circle center-block" width="230" height="230">
+                        <input type="file" class="center-block" name="avatar" style="margin-top: 10px;margin-bottom: 10px;">
+                        <button type="submit" class="btn btn-success center-block">Change avatar</button>
+                    </form>
+                </div>
+                <div class="col-lg-8 col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {% include 'components/blog/alerts.twig' %}
+                        </div>
+                    </div>
+                    <form action="{{ path_for('updateProfile') }}" method="post">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" id="username" class="form-control" value="{{ app.user.getAccount(app.session.get('uid')).username }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" id="email" class="form-control" value="{{ app.user.getAccount(app.session.get('uid')).email }}" placeholder="Please enter a email address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" value="{{ app.user.getProfile(app.session.get('uid')).name }}" placeholder="Please enter your name">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" id="last_name" value="{{ app.user.getProfile(app.session.get('uid')).last_name }}" placeholder="Please enter your last name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select name="country" id="country" class="form-control">
+                                        {% if app.user.getProfile(app.session.get('uid')).country  == '' %}
+                                            <option selected>Select your country</option>
+                                        {% else %}
+                                            <option value="{{ app.user.getProfile(app.session.get('uid')).country }}" selected>{{ app.user.getProfile(app.session.get('uid')).country }}</option>
+                                        {% endif %}
+                                        <option value="" disabled>-------------</option>
+                                        {% include 'components/acp/selectCountryes.twig' %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city" class="form-control" id="city" value="{{ app.user.getProfile(app.session.get('uid')).city }}" placeholder="Please enter your city name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="total_posts">Total Posts</label>
+                                    <input type="text" id="total_posts" class="form-control" value="{{ app.post.count(app.session.get('uid')) }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="total_comment">Total Comments</label>
+                                    <input type="text" id="total_comment" class="form-control" value="{{ app.comment.countUserComments(app.session.get('uid')) }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">Update Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="{{ path_for('delete') }}" method="post">
+                        <div class="form-group">
+                            <input type="hidden" value="{{ app.session.get('uid') }}" name="uid">
+                            <button type="submit" class="btn btn-danger">Delete Account</button>
+                        </div>
+                    </form>
+                    <div class="divider"></div>
+                    <form action="{{ path_for('updatePassword') }}" method="post">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="old_password">Current Password</label>
+                                    <input type="password" name="old_password" id="old_password" class="form-control" placeholder="Please enter your current password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="new_password">New Password</label>
+                                    <input type="password" name="new_password" id="new_password" class="form-control" placeholder="Please chose your new password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="conf_new_password">Confirm New Password</label>
+                                    <input type="password" name="conf_new_password" id="conf_new_password" class="form-control" placeholder="Please confirm your new password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info">Update password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% include 'components/blog/sidebar.twig' %}
+    </div>
+</div>
+<!-- end Content -->
+{% include 'components/blog/footer.twig' %}

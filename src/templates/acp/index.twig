@@ -1,0 +1,143 @@
+{% set pageTitle = "ACP | Home" %}
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s6 m3 l3">
+        <div class="card green-custom">
+            <div class="card-content white-text">
+                <span class="card-title"><i class="fas fa-users"></i> Users</span>
+                <p>{{ app.user.countAllUsers() }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col s6 m3 l3">
+        <div class="card yellow-custom">
+            <div class="card-content white-text">
+                <span class="card-title"><i class="fas fa-align-left"></i> Posts</span>
+                <p>{{ app.post.countAllPosts() }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col s6 m3 l3">
+        <div class="card blue-custom">
+            <div class="card-content white-text">
+                <span class="card-title"><i class="fas fa-comments"></i> Comments</span>
+                <p>{{ app.comment.countAllComments() }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col s6 m3 l3">
+        <div class="card red-custom">
+            <div class="card-content white-text">
+                <span class="card-title"><i class="fas fa-exclamation-circle"></i> Reports</span>
+                <p>{{ app.report.countAllReports() }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m12 l6">
+        <div class="panel">
+            <div class="panel-title">Comments Statistics</div>
+            <div class="panel-body">
+                <canvas id="subscribe" style="width: 100%; max-height: 400px;"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m12 l6">
+        <div class="panel">
+            <div class="panel-title">Users Statistics</div>
+            <div class="panel-body">
+                <canvas id="users" style="width: 100%; max-height: 400px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script type="text/javascript">
+    var subscribe = document.getElementById("subscribe").getContext('2d');
+    var subscribeStats = new Chart(subscribe, {
+        type: 'line',
+        options: {
+            legend: {
+                display: false
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return tooltipItem.yLabel;
+                    }
+                }
+            }
+        },
+        data: {
+            labels: [
+                "{{ app.function.printDate(6) }}",
+                "{{ app.function.printDate(5) }}",
+                "{{ app.function.printDate(4) }}",
+                "{{ app.function.printDate(3) }}",
+                "{{ app.function.printDate(2) }}",
+                "{{ app.function.printDate(1) }}",
+                "{{ app.function.printDate(0) }}"],
+            datasets: [{
+                label: '',
+                data: [
+                    "{{ app.comment.stats(6) }}",
+                    "{{ app.comment.stats(5) }}",
+                    "{{ app.comment.stats(4) }}",
+                    "{{ app.comment.stats(3) }}",
+                    "{{ app.comment.stats(2) }}",
+                    "{{ app.comment.stats(1) }}",
+                    "{{ app.comment.stats(0) }}"
+                ],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                borderColor: ['rgba(255,99,132,1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    var users = document.getElementById("users").getContext('2d');
+    var subscribeStats = new Chart(users, {
+        type: 'line',
+        options: {
+            legend: {
+                display: false
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return tooltipItem.yLabel;
+                    }
+                }
+            }
+        },
+        data: {
+            labels: [
+                "{{ app.function.printDate(6) }}",
+                "{{ app.function.printDate(5) }}",
+                "{{ app.function.printDate(4) }}",
+                "{{ app.function.printDate(3) }}",
+                "{{ app.function.printDate(2) }}",
+                "{{ app.function.printDate(1) }}",
+                "{{ app.function.printDate(0) }}"
+            ],
+            datasets: [{
+                label: '',
+                data: [
+                    "{{ app.user.stats(6) }}",
+                    "{{ app.user.stats(5) }}",
+                    "{{ app.user.stats(4) }}",
+                    "{{ app.user.stats(3) }}",
+                    "{{ app.user.stats(2) }}",
+                    "{{ app.user.stats(1) }}",
+                    "{{ app.user.stats(0) }}"
+                ],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)',],
+                borderColor: ['rgba(255,99,132,1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
+{% include 'components/acp/footer.twig' %}

@@ -1,0 +1,94 @@
+{% include 'components/acp/header.twig' %}
+{% include 'components/acp/menu.twig' %}
+<div class="row">
+    <div class="col s12 m12 offset-l2 l8">
+        <div class="panel">
+            <div class="panel-title">Blog settings</div>
+            <div class="panel-body">
+                <form action="{{ path_for('updateConfigs') }}" method="post">
+                    <div class="input-field">
+                        <label for="blogTitle">Blog Name</label>
+                        <input id="blogTitle" name="blogTitle" type="text" value="{{ app.config.get('blogTitle') }}">
+                    </div>
+                    <div class="input-field">
+                        <label for="blogLogo">Blog logo</label>
+                        <input id="blogLogo" name="blogLogo" type="text" value="{{ app.config.get('blogLogo') }}">
+                    </div>
+                    <div class="input-field">
+                        <label for="contact">Blog contact</label>
+                        <input id="contact" name="contact" type="email" value="{{ app.config.get('contactEmail') }}">
+                    </div>
+                    <div class="input-field">
+                        <label for="blogDescription">Description</label>
+                        <textarea id="blogDescription" name="blogDescription" class="materialize-textarea">{{ app.config.get('blogDescription') }}</textarea>
+                    </div>
+                    <div class="input-field">
+                        <label for="blogKeywords">Keywords</label>
+                        <textarea id="blogKeywords" name="blogKeywords" class="materialize-textarea">{{ app.config.get('blogKeywords') }}</textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col s3">
+                            <div class="input-field">
+                                <label>
+                                    {% if app.config.get('enableGoogleAnalytics') %}
+                                        <input type="checkbox" name="enableGoogleAnalytics" checked="checked" value="1">
+                                    {% else %}
+                                        <input type="checkbox" name="enableGoogleAnalytics" value="1">
+                                    {% endif %}
+                                    <span>Enable Google Analytics</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col s9">
+                            <div class="input-field">
+                                <label for="analytics">Google Analytics Tracking ID</label>
+                                <input type="text" id="analytics" name="googleAnalyticsId" value="{{ app.config.get('googleAnalytics') }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <p>
+                            <label>
+                                {% if app.config.get('blogEnableAutoConfirmComment') %}
+                                <input type="checkbox" name="blogEnableAutoConfirmComment" checked="checked" value="1">
+                                {% else %}
+                                    <input type="checkbox" name="blogEnableAutoConfirmComment" value="1">
+                                {% endif %}
+                                <span>Enable Auto Confirm Account</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="input-field">
+                        <p>
+                            <label>
+                                {% if app.config.get('blogEnableAutoConfirmAccount') %}
+                                    <input type="checkbox" checked="checked" name="blogEnableAutoConfirmAccount" value="1">
+                                {% else %}
+                                    <input type="checkbox" name="blogEnableAutoConfirmAccount" value="1">
+                                {% endif %}
+                                <span>Enable Auto Confirm Comment</span>
+                            </label>
+                        </p>
+                    </div>
+                    <br />
+                    <div class="input-field">
+                        <label for="facebook">Facebook</label>
+                        <input id="facebook" type="url" name="facebook" value="{{ app.config.get('facebook') }}">
+                    </div>
+                    <div class="input-field">
+                        <label for="google">Google</label>
+                        <input id="google" type="url" name="google" value="{{ app.config.get('google') }}">
+                    </div>
+                    <div class="input-field">
+                        <label for="twitter">Twitter</label>
+                        <input id="twitter" type="url" name="twitter" value="{{ app.config.get('twitter') }}">
+                    </div>
+                    <div class="input-field">
+                        <button type="submit" class="btn-small">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'components/acp/footer.twig' %}

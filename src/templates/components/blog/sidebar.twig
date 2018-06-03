@@ -1,0 +1,59 @@
+<!--- Side bar --->
+<div class="col-lg-4">
+    <div class="widget-sidebar">
+        <div class="title-widget-sidebar">Search</div>
+        <form action="{{ path_for('search') }}" method="post">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search">
+                    <div class="input-group-btn"><button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Recent posts list -->
+    <div class="widget-sidebar">
+        <div class="title-widget-sidebar">Most commented posts</div>
+        {% for post in app.post.getMostCommentPosts() %}
+        <!--- Recent post --->
+        <div class="recent-post">
+            <div class="post-img">
+                <img src="{{ post.header_img }}" class="img-responsive">
+            </div>
+            <a href="{{ path_for('read') }}/{{ post.id }}"><h5>{{ post.title }}</h5></a>
+            <p><small><span class="glyphicon glyphicon-calendar"></span> {{ app.function.convertDate(post.created_at) }}</small></p>
+        </div>
+        <!--- End Recent post --->
+        {% endfor %}
+    </div>
+    <!-- Category list -->
+    <div class="widget-sidebar">
+        <div class="title-widget-sidebar">Categories</div>
+        {% for category in app.category.getCategories() %}
+            <a href="{{ path_for('category') }}/{{ category.id }}" class="categories-btn">{{ category.name }}</a>
+        {% endfor %}
+    </div>
+    <!-- News letter -->
+    <div class="widget-sidebar">
+        <div class="title-widget-sidebar">News letter</div>
+        <form action="{{ path_for('actionSubscribe') }}" method="post">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Email" name="email">
+                    <div class="input-group-btn"><button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-envelope"></span></button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Social networks -->
+    <div class="widget-sidebar">
+        <div class="title-widget-sidebar">Social</div>
+        <div class="social-icon">
+            <div class="social-icon">
+                <a href="{{ app.config.get('facebook') }}"> <i class="fab fa-facebook-square fa-2x"></i></a>
+                <a href="{{ app.config.get('twitter') }}"> <i class="fab fa-twitter-square fa-2x"></i></a>
+                <a href="{{ app.config.get('google') }}"> <i class="fab fa-google-plus-square fa-2x"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
